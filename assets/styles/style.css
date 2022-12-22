@@ -126,3 +126,63 @@ img {
 .player-score-container > h2:nth-child(2) {
     color: rgb(202, 18, 248);
 }
+
+.naming-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid black; */
+    border-radius: 15px;
+    background-color: #f0eef1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    transition: ease-in;
+    width: 300px;
+    visibility: hidden;
+    padding: 60px 0px;
+    gap: 20px;
+}
+
+.naming-container > input {
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    padding: 6px;
+}
+
+.naming-container > button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.naming-container > button:hover {
+  background-color: #f7fafa;
+}
+
+.naming-container > button:focus {
+  border-color: #008296;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  outline: 0;
+}

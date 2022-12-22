@@ -8,20 +8,30 @@
     <script src="assets/scripts/script.js" defer></script>
     <title>Index</title>
 </head>
-<body>
-
+<body id="body">
+    <div class="popup">
+        
+        <form action="" method="post" class="player-name-form">
+            <div class="naming-container">
+                <input type="text" class="player-1-name-input" name="player-1-name-input" placeholder="Player 1">
+                <input type="text" class="player-2-name-input" name="player-2-name-input" placeholder="Player 2">
+                <button type="submit">DONE</button>
+            </div>
+    
+        </form>
+    </div>
 
     <div class="main-container">
         <div class="left-section">
             <div class="players-shape-section">
                 <div class="player-shape-group">
-                    <h2 class="player-name">
+                    <h2 class="player-name" id="player1-name">
                         PLAYER 1
                     </h2>
                     <h2 class="player-shape">X</h2>
                 </div>
                 <div class="player-shape-group">
-                    <h2 class="player-name">
+                    <h2 class="player-name" id="player2-name">
                         PLAYER 2
                     </h2>
                     <h2 class="player-shape">O</h2>
@@ -29,8 +39,9 @@
 
             </div>
             <div class="game-buttons">
-                <button>RESET GAME</button>
-                <button>RESET SCORE</button>
+                <button class="menu-buttons" id="player-name-btn">NAME PLAYERS</button>
+                <button class="menu-buttons" id="reset-game-btn">RESET GAME</button>
+                <button class="menu-buttons" id="reset-score-btn">RESET SCORE</button>
             </div>
         </div>
 
