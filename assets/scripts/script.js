@@ -17,8 +17,26 @@ const board = (() => {
 
 
 const playerFactory = (name, shape) => {
+
+
+
     return {name, shape};  
 }
+
+const turnChange = (() => {
+    let turn = 1;
+    const change = () => {
+        if (turn === 1) {
+            turn = 2;
+            console.log(`turn ${turn}`);
+        } else if (turn === 2) {
+            turn = 1;
+            console.log(`turn ${turn}`);
+
+        }
+    }
+    return {change};
+})();
 
 
 // LEFT SIDE 
@@ -26,6 +44,11 @@ const body = document.getElementById('body');
 const popup = document.querySelector('.naming-container');
 const form = document.querySelector('.player-name-form');
 const inputs = document.querySelectorAll('.input');
+
+//FORM FIELDS
+
+const receivedFirstPlayer = document.querySelector('.player-1-name-input');
+const receivedSecondPlayer = document.querySelector('.player-2-name-input');
 
 
 //BOARD
@@ -77,5 +100,15 @@ popup.addEventListener('click', (e) => {
     e.stopPropagation();
 })
 
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
+    const firstPlayerName = receivedFirstPlayer.value;
+    const secondPlayerName = receivedSecondPlayer.value;
+
+    player1Name.innerHTML = `${firstPlayerName}`;
+    player2Name.innerHTML = `${secondPlayerName}`;
+
+    body.click();
+})
 
