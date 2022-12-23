@@ -37,7 +37,13 @@ const turnChange = (() => {
             console.log(`turn ${turnChange.turn}`);
         }
     }
-    return {change, turn, shape};
+
+    const reset = () => {
+        turnChange.turn = 1;
+        turnChange.shape = "X";
+    }
+
+    return {change, turn, shape, reset};
 })();
 
 
@@ -123,10 +129,28 @@ form.addEventListener('submit', (e) => {
     const firstPlayerName = receivedFirstPlayer.value;
     const secondPlayerName = receivedSecondPlayer.value;
 
-    player1Name.innerHTML = `${firstPlayerName}`;
-    player2Name.innerHTML = `${secondPlayerName}`;
-    player1ScoreName.innerHTML = `${firstPlayerName}`;
-    player2ScoreName.innerHTML = `${secondPlayerName}`;
+    if (firstPlayerName !== "") {
+        player1Name.innerHTML = `${firstPlayerName}`;
+        player1ScoreName.innerHTML = `${firstPlayerName}`;
+    }
+    if (secondPlayerName !== "") {
+        player2Name.innerHTML = `${secondPlayerName}`;
+        player2ScoreName.innerHTML = `${secondPlayerName}`;
+    }
+
+
+
     body.click();
 })
+
+resetGameBtn.addEventListener('click', () => {
+    for (let i = 0; i < cellList.length; i++) {
+        cellList[i].id = `${i}`;
+        const currentCell = cellList[i];
+        board.markCell("", [i]);
+        turnChange.change();
+        }
+    turnChange.reset();
+})
+
 
