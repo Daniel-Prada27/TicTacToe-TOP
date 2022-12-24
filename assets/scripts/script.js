@@ -1,26 +1,86 @@
 /* eslint-disable semi */
 /* eslint-disable no-unused-vars */
 
+//BOARD
+
+const cellList = document.querySelectorAll('.board-btn')
+
+// for (let i = 0; i < cellList.length; i++) {
+//     cellList[i].id = `${i}`;
+//     const currentCell = cellList[i];
+//     currentCell.addEventListener('click', (e) => {
+//         e.stopPropagation();
+//         if (currentCell.innerHTML === "") {
+//             board.markCell(turnChange.shape, [i]);
+//             board.checkWin;
+//             turnChange.change();
+//         }
+
+//     })
+// }
+
+
 // CONSTRUCTORS
 
 const board = (() => {
 
-    const board = []
+    for (let i = 0; i < cellList.length; i++) {
+        cellList[i].id = `${i}`;
+        const currentCell = cellList[i];
+        currentCell.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentCell.innerHTML === "") {
+                board.markCell(turnChange.shape, [i]);
+                turnChange.change();
+                board.checkWin();
+            }
+    
+        })
+    }
+
+
+    let firstRow = [cellList[0], cellList[1], cellList[2]];
+    let secondRow = [cellList[3], cellList[4], cellList[5]];
+    let thirdRow = [cellList[6], cellList[7], cellList[8]];
+
+    const checkWin = () => {
+        for (let i = 0; i < firstRow.length; i++) {
+            console.log(firstRow[i].innerHTML);
+            if (firstRow[i].innerHTML !== "") {
+                if (firstRow[i].innerHTML === secondRow[i].innerHTML && (secondRow[i].innerHTML === thirdRow[i].innerHTML)) {
+                    if (firstRow[i].innerHTML === "X") {
+                        player1.win();
+                        player1Score.innerHTML = `${player1.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    } else if (firstRow[i].innerHTML === "O") {
+                        player2.win();
+                        player2Score.innerHTML = `${player2.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    } else {
+                        return;
+                    }
+                }
+            }
+        }
+    }
 
     const markCell = (shape, cell) => {
         cellList[cell].innerHTML = `${shape}`;
+        // checkWin();
     }
     
-    return {markCell};
+    return {markCell, checkWin};
 
 })();
 
 
 const playerFactory = (name, shape) => {
 
+    let winCount = 0;
 
-
-    return {name, shape};  
+    return {name, shape, winCount: () => {return winCount;}, win: () => {winCount++;}};  
 }
 
 const turnChange = (() => {
@@ -30,11 +90,11 @@ const turnChange = (() => {
         if (turnChange.turn === 1) {
             turnChange.turn = 2;
             turnChange.shape = "O";
-            console.log(`turn ${turnChange.turn}`);
+            // console.log(`turn ${turnChange.turn}`);
         } else if (turnChange.turn === 2) {
             turnChange.turn = 1;
             turnChange.shape = "X";
-            console.log(`turn ${turnChange.turn}`);
+            // console.log(`turn ${turnChange.turn}`);
         }
     }
 
@@ -59,25 +119,6 @@ const receivedFirstPlayer = document.querySelector('.player-1-name-input');
 const receivedSecondPlayer = document.querySelector('.player-2-name-input');
 
 
-//BOARD
-
-const cellList = document.querySelectorAll('.board-btn')
-
-for (let i = 0; i < cellList.length; i++) {
-    cellList[i].id = `${i}`;
-    const currentCell = cellList[i];
-    currentCell.addEventListener('click', () => {
-
-        if (currentCell.innerHTML === "") {
-            board.markCell(turnChange.shape, [i]);
-            turnChange.change();
-        }
-
-    })
-}
-
-
-
 
 // LEFT SIDE 
 const player1Name = document.getElementById('player1-name');
@@ -89,7 +130,11 @@ const resetScoreBtn = document.getElementById('reset-score-btn');
 //RIGHT SIDE
 const player1ScoreName = document.getElementById('player1NameScore'); 
 const player2ScoreName = document.getElementById('player2NameScore');
+const player1Score = document.getElementById('firstPlayerWins');
+const player2Score = document.getElementById('secondPlayerWins');
 
+let player1 = playerFactory(`${receivedFirstPlayer.value}`, "X");
+let player2 = playerFactory(`${receivedSecondPlayer.value}`, "O");
 
 playerNameBtn.addEventListener('click', (e) => {
     if (popup.style.visibility === 'visible') {
@@ -107,10 +152,6 @@ body.addEventListener('click', () => {
       popup.style.cssText = 'transform: translate(-50%, -50%) scale(0.1); visibility: hidden;';
       body.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     }
-    // if (searchPopup.style.visibility === 'visible' || searchPopup.style.visibility === 'visible') {
-    //   searchPopup.style.cssText = 'transform: translate(-50%, -50%) scale(0.1); visibility: hidden;';
-    //   body.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-    // }
   })
 
 for (let i = 0; i < inputs.length; i++) {
@@ -126,31 +167,45 @@ popup.addEventListener('click', (e) => {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const firstPlayerName = receivedFirstPlayer.value;
-    const secondPlayerName = receivedSecondPlayer.value;
+    player1 = playerFactory(`${receivedFirstPlayer.value}`, "X");
+    player2 = playerFactory(`${receivedSecondPlayer.value}`, "O");
 
-    if (firstPlayerName !== "") {
-        player1Name.innerHTML = `${firstPlayerName}`;
-        player1ScoreName.innerHTML = `${firstPlayerName}`;
+    if (player1.name !== "") {
+        player1Name.innerHTML = player1.name;
+        player1ScoreName.innerHTML = player1.name;
     }
-    if (secondPlayerName !== "") {
-        player2Name.innerHTML = `${secondPlayerName}`;
-        player2ScoreName.innerHTML = `${secondPlayerName}`;
+    if (player2.name !== "") {
+        player2Name.innerHTML = player2.name;
+        player2ScoreName.innerHTML = player2.name;
     }
-
-
 
     body.click();
 })
 
-resetGameBtn.addEventListener('click', () => {
-    for (let i = 0; i < cellList.length; i++) {
-        cellList[i].id = `${i}`;
-        const currentCell = cellList[i];
-        board.markCell("", [i]);
-        turnChange.change();
-        }
-    turnChange.reset();
+resetGameBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (popup.style.visibility === 'visible') {
+        body.click();
+
+    } else {
+        for (let i = 0; i < cellList.length; i++) {
+            const currentCell = cellList[i];
+            currentCell.id = `${i}`;
+            currentCell.innerHTML = "";
+            // turnChange.change();
+            }
+        turnChange.reset();
+    }
+
 })
 
+resetScoreBtn.addEventListener('click', () => {
 
+    if (popup.style.visibility === 'visible') {
+        body.click();
+    } else {
+        player1Score.innerHTML = "0 wins";
+        player2Score.innerHTML = "0 wins";
+    }
+
+})
