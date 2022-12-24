@@ -107,7 +107,36 @@ const board = (() => {
                 }
             }
 
-
+            if (firstRow[0].innerHTML !== "" && firstRow[0].innerHTML === secondRow[1].innerHTML && secondRow[1].innerHTML === thirdRow[2].innerHTML) {
+                if (firstRow[0].innerHTML === "X") {
+                    player1.win();
+                    player1Score.innerHTML = `${player1.winCount()} wins`;
+                    resetGameBtn.click();
+                    return;
+                } else if (firstRow[0].innerHTML === "O") {
+                    player2.win();
+                    player2Score.innerHTML = `${player2.winCount()} wins`;
+                    resetGameBtn.click();
+                    return;
+                } else {
+                    return;
+                }
+            }
+            if (firstRow[2].innerHTML !== "" && firstRow[2].innerHTML === secondRow[1].innerHTML && secondRow[1].innerHTML === thirdRow[0].innerHTML) {
+                if (firstRow[2].innerHTML === "X") {
+                    player1.win();
+                    player1Score.innerHTML = `${player1.winCount()} wins`;
+                    resetGameBtn.click();
+                    return;
+                } else if (firstRow[2].innerHTML === "O") {
+                    player2.win();
+                    player2Score.innerHTML = `${player2.winCount()} wins`;
+                    resetGameBtn.click();
+                    return;
+                } else {
+                    return;
+                }
+            }
         }
     }
 
