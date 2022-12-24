@@ -80,7 +80,9 @@ const playerFactory = (name, shape) => {
 
     let winCount = 0;
 
-    return {name, shape, winCount: () => {return winCount;}, win: () => {winCount++;}};  
+    return {name, shape, winCount: () => {return winCount;}, win: () => {winCount++;}, resetWin: () => {
+        winCount = 0;
+    }};  
 }
 
 const turnChange = (() => {
@@ -206,6 +208,8 @@ resetScoreBtn.addEventListener('click', () => {
     } else {
         player1Score.innerHTML = "0 wins";
         player2Score.innerHTML = "0 wins";
+        player1.resetWin();
+        player2.resetWin();
     }
 
 })
