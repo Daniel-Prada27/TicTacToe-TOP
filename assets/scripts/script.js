@@ -42,7 +42,7 @@ const board = (() => {
     let firstRow = [cellList[0], cellList[1], cellList[2]];
     let secondRow = [cellList[3], cellList[4], cellList[5]];
     let thirdRow = [cellList[6], cellList[7], cellList[8]];
-
+    const allEqual = arr => arr.every(val => val.innerHTML === arr[0].innerHTML);
     const checkWin = () => {
         for (let i = 0; i < firstRow.length; i++) {
             console.log(firstRow[i].innerHTML);
@@ -62,7 +62,52 @@ const board = (() => {
                         return;
                     }
                 }
+                if (allEqual(firstRow)) {
+                    if (firstRow[i].innerHTML === "X") {
+                        player1.win();
+                        player1Score.innerHTML = `${player1.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    } else if (firstRow[i].innerHTML === "O") {
+                        player2.win();
+                        player2Score.innerHTML = `${player2.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    }
+                }
             }
+            if (secondRow[i].innerHTML !== "") {
+                if (allEqual(secondRow)) {
+                    if (secondRow[i].innerHTML === "X") {
+                        player1.win();
+                        player1Score.innerHTML = `${player1.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    } else if (secondRow[i].innerHTML === "O") {
+                        player2.win();
+                        player2Score.innerHTML = `${player2.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    }
+                }
+            }
+            if (thirdRow[i].innerHTML !== "") {
+                if (allEqual(thirdRow)) {
+                    if (thirdRow[i].innerHTML === "X") {
+                        player1.win();
+                        player1Score.innerHTML = `${player1.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    } else if (thirdRow[i].innerHTML === "O") {
+                        player2.win();
+                        player2Score.innerHTML = `${player2.winCount()} wins`;
+                        resetGameBtn.click();
+                        return;
+                    }
+                }
+            }
+
+
         }
     }
 
