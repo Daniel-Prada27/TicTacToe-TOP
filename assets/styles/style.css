@@ -58,6 +58,15 @@ img {
     border-radius: 8px;
 }
 
+#player-name-btn:hover {
+    background-color: #1fc1ff;
+}
+
+#reset-game-btn:hover, #reset-score-btn:hover {
+    background-color: #ff013c;
+    color: white;
+}
+
 /* BOARD  */
 
 .board-section {

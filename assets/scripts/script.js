@@ -5,21 +5,6 @@
 
 const cellList = document.querySelectorAll('.board-btn')
 
-// for (let i = 0; i < cellList.length; i++) {
-//     cellList[i].id = `${i}`;
-//     const currentCell = cellList[i];
-//     currentCell.addEventListener('click', (e) => {
-//         e.stopPropagation();
-//         if (currentCell.innerHTML === "") {
-//             board.markCell(turnChange.shape, [i]);
-//             board.checkWin;
-//             turnChange.change();
-//         }
-
-//     })
-// }
-
-
 // CONSTRUCTORS
 
 const board = (() => {
